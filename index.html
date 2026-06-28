@@ -3,66 +3,271 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Willy | Reflexiones</title>
+    <title>Willyydd - Enciclopedia Personal</title>
     <style>
+        /* CSS Estilo Wikipedia Oscura */
         body {
-            background-color: #0a0a0a;
-            color: #d1d1d1;
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
             margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
             display: flex;
             justify-content: center;
         }
-        .container {
-            max-width: 650px;
-            width: 90%;
-            margin-top: 80px;
+
+        .wiki-container {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            width: 100%;
+            max-width: 1400px;
+            min-height: 100vh;
         }
-        header {
-            border-bottom: 1px solid #333;
-            padding-bottom: 20px;
-            margin-bottom: 40px;
+
+        /* Menú Lateral (Sidebar) */
+        .wiki-sidebar {
+            background-color: #1a1a1a;
+            border-right: 1px solid #2d2d2d;
+            padding: 20px;
+            box-sizing: border-box;
         }
-        h1 {
-            color: #ffffff;
-            font-size: 1.8rem;
-            letter-spacing: -1px;
-        }
-        .post {
-            margin-bottom: 50px;
-        }
-        .post-date {
-            font-size: 0.8rem;
-            color: #666;
-            text-transform: uppercase;
-        }
-        .post-title {
-            color: #ffffff;
-            margin: 10px 0;
+
+        .wiki-logo {
             font-size: 1.4rem;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 30px;
+            text-align: center;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
         }
-        p {
+
+        .wiki-sidebar h3 {
+            font-size: 0.85rem;
+            color: #888888;
+            text-transform: uppercase;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .wiki-sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .wiki-sidebar ul li {
+            margin-bottom: 8px;
+        }
+
+        .wiki-sidebar ul li a {
+            color: #66b2ff;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .wiki-sidebar ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Contenido Principal */
+        .wiki-main {
+            padding: 40px;
+            background-color: #121212;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        .wiki-title {
+            font-family: "Linux Libertine", "Georgia", "Times", serif;
+            font-size: 2.3rem;
+            font-weight: normal;
+            color: #ffffff;
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+
+        .wiki-subtitle {
+            font-size: 0.85rem;
+            color: #888888;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #3a3a3a;
+            margin-bottom: 20px;
+        }
+
+        /* Distribución de Artículo e Infobox */
+        .wiki-article-body {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        .wiki-text {
+            flex: 1;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .wiki-text p {
+            margin-top: 0;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        /* Secciones H2 estilo Wiki */
+        .wiki-section-title {
+            font-family: "Linux Libertine", "Georgia", "Times", serif;
+            font-size: 1.5rem;
+            font-weight: normal;
+            border-bottom: 1px solid #3a3a3a;
+            padding-bottom: 5px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        /* Ficha Técnica (Infobox) de la Derecha */
+        .wiki-infobox {
+            width: 300px;
+            background-color: #1a1a1a;
+            border: 1px solid #3a3a3a;
+            padding: 12px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .wiki-infobox-title {
             font-size: 1.1rem;
-            color: #b0b0b0;
+            font-weight: bold;
+            text-align: center;
+            background-color: #262626;
+            padding: 8px;
+            margin: -12px -12px 10px -12px;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            color: #ffffff;
+            border-bottom: 1px solid #3a3a3a;
+        }
+
+        .wiki-infobox-img {
+            text-align: center;
+            margin-bottom: 10px;
+            background-color: #222;
+            padding: 10px;
+            border-radius: 4px;
+            color: #555;
+            font-style: italic;
+        }
+
+        .wiki-infobox table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .wiki-infobox th {
+            text-align: left;
+            padding: 5px 0;
+            color: #888888;
+            font-weight: 600;
+            width: 40%;
+            vertical-align: top;
+        }
+
+        .wiki-infobox td {
+            padding: 5px 0;
+            color: #e0e0e0;
+        }
+
+        /* Enlaces dentro del texto */
+        .wiki-text a {
+            color: #66b2ff;
+            text-decoration: none;
+        }
+
+        .wiki-text a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Willy's Log.</h1>
-            <p style="font-size: 0.9rem; color: #555;">Living, unfortunately... but thinking a lot.</p>
-        </header>
 
-        <article class="post">
-            <div class="post-date">26 de Abril, 2026</div>
-            <h2 class="post-title">El inicio de la bitácora</h2>
-            <p>
-                Bienvenidos a mi rincón personal. Aquí no hay límites de caracteres ni algoritmos, 
-                solo pensamientos crudos sobre la vida, el software y lo que surja en el camino.
-            </p>
-        </article>
+    <div class="wiki-container">
+        
+        <!-- BARRA LATERAL (Navegación estilo Wiki) -->
+        <aside class="wiki-sidebar">
+            <div class="wiki-logo">WIKIPENSAMIENTOS</div>
+            
+            <h3>Navegación</h3>
+            <ul>
+                <li><a href="#">Portada</a></li>
+                <li><a href="#">Índice de ideas</a></li>
+                <li><a href="#">Cambios recientes</a></li>
+            </ul>
+
+            <h3>Categorías</h3>
+            <ul>
+                <li><a href="#">Filosofía</a></li>
+                <li><a href="#">Análisis Técnico</a></li>
+                <li><a href="#">Reflexiones Nocturnas</a></li>
+            </ul>
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL DE LA PÁGINA -->
+        <main class="wiki-main">
+            <h1 class="wiki-title">Filosofía de la Mente Conectada</h1>
+            <div class="wiki-subtitle">De Wikipedia, la enciclopedia de pensamientos libres.</div>
+            <hr>
+
+            <div class="wiki-article-body">
+                
+                <!-- Cuerpo del artículo -->
+                <div class="wiki-text">
+                    <p>La <b>mente conectada</b> es un concepto analítico que describe el estado en el cual la conciencia humana procesa la realidad a través del filtro de sistemas lógicos binarios. En la era de la sobreestimulación, mantener el orden mental requiere un proceso de depuración similar al <a href="#">debloat</a> de un sistema operativo móvil.</p>
+                    
+                    <p>Cuando eliminamos los procesos parásitos de nuestro entorno, no solo liberamos ráfagas de atención, sino que forzamos a los clústeres de pensamiento profundo a trabajar con frecuencias estables.</p>
+
+                    <!-- Nueva sección con la línea gris clásica abajo -->
+                    <h2 class="wiki-section-title">1. El Ruido en Segundo Plano</h2>
+                    <p>Así como la telemetría oculta consume ciclos de reloj en un procesador sin que el usuario lo note, las interacciones cotidianas irrelevantes saturan nuestra memoria caché emocional. La distancia analítica funciona entonces como una consola de comandos para apagar los chivatos del sistema social.</p>
+                </div>
+
+                <!-- FICHA TÉCNICA (INFOBOX) -->
+                <aside class="wiki-infobox">
+                    <div class="wiki-infobox-title">Pensamiento Activo</div>
+                    <div class="wiki-infobox-img">[ Espacio para una Imagen/Icono ]</div>
+                    <table>
+                        <tr>
+                            <th>Estado:</th>
+                            <td>En desarrollo</td>
+                        </tr>
+                        <tr>
+                            <th>Prioridad:</th>
+                            <td>Alta</td>
+                        </tr>
+                        <tr>
+                            <th>Frecuencia:</th>
+                            <td>3:00 AM</td>
+                        </tr>
+                        <tr>
+                            <th>Herramientas:</th>
+                            <td>HTML, CSS, Markdown</td>
+                        </tr>
+                    </table>
+                </aside>
+
+            </div>
+
+        </main>
+
     </div>
+
 </body>
 </html>
